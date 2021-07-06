@@ -1,0 +1,318 @@
+\documentclass[titlepage,a4paper,10pt]{scrartcl}
+\usepackage{fontspec}
+\usepackage{xltxtra}
+\usepackage{polyglossia}
+\usepackage{ifthen}
+
+\defaultfontfeatures{
+  Extension       = .otf ,
+  Mapping       = tex-text,
+  Script          = Thai
+  }
+
+\defaultfontfeatures[Garuda,TlwgTypist]{
+ItalicFont      = *-Oblique ,
+BoldFont        = *-Bold ,
+BoldItalicFont  = *-BoldOblique ,
+}
+
+\defaultfontfeatures[Norasi]{
+ItalicFont      = *-Italic ,
+SlantedFont     = *-Oblique ,
+BoldFont        = *-Bold ,
+BoldItalicFont  = *-BoldItalic ,
+BoldSlantedFont = *-BoldOblique ,
+}
+
+% Laksaman or Saraban
+\defaultfontfeatures[Laksaman]{
+ItalicFont      = *-Italic ,
+BoldFont        = *-Bold ,
+BoldItalicFont  = *-BoldItalic ,
+}
+
+% Chulabhorn Likit Text
+\defaultfontfeatures[ChulabhornLikitText]{
+Path                = ./,
+UprightFont   = *-Regular,
+BoldFont        = *-Bold ,
+}
+
+% Anakotmai
+\defaultfontfeatures[Anakotmai]{
+Path                = ./,
+UprightFont   = *-Medium,
+BoldFont             = *-Bold ,
+}
+
+\newfontfamily\laksaman{Laksaman}
+\newfontfamily\ChulabhornLikitText{ChulabhornLikitText}[
+  FontFace = {mb}{n}{ Font = *-Medium },
+  FontFace = {l}{n}{ Font = *-Light },
+]
+
+\newfontfamily\Anakotmai{Anakotmai}[
+  FontFace = {mb}{n}{ Font = *-Medium },
+  FontFace = {l}{n}{ Font = *-Light },
+]
+
+
+\newfontfamily\thaifont{Norasi}
+\newfontfamily\thaifontsf{Garuda}
+\newfontfamily\thaifonttt{TlwgTypist}
+
+\setdefaultlanguage[numerals=thai]{thai}
+ \XeTeXlinebreaklocale "th"
+\XeTeXlinebreakskip = 0pt plus 1pt \relax 
+
+
+%% Command for test Thai Fonts
+
+\def\textyamakkan{\symbol{"0E4E}}
+\def\textfongmun{\symbol{"0E4F}}
+\def\textangkhankhu{\symbol{"0E5A}}
+\def\textkhomut{\symbol{"0E5B}}
+
+\makeatletter
+\def\flist{Laksaman,ChulabhornLikitText,Anakotmai}
+
+\newcommand\showthaifont{
+  \begin{itemize}
+    \@for\next:=\flist%
+  \do{%
+  \item  \fontspec{\next} \fontseries{m}\fontshape{n}\selectfont แบบอักษรไทย \next{} ใน \LaTeX %
+    }
+  \end{itemize}
+  }
+\makeatother
+
+\newcommand{\testthaipoem}[3]{%
+#1\fontseries{#2}\fontshape{#3}\selectfont 
+  \noindent
+  \begin{tabbing}
+  {{#1\fontseries{b}\fontshape{n}\selectfont
+    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX}} \=
+  {{#1\fontseries{b}\fontshape{n}\selectfont
+    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX}}\kill
+  \hspace{1em}๏ เป็นมนุษย์สุดประเสริฐเลิศคุณค่า \> กว่าบรรดาฝูงสัตว์เดรัจฉาน \\
+  จงฝ่าฟันพัฒนาวิชาการ          \> อย่าล้างผลาญฤๅเข่นฆ่าบีฑาใคร\\
+  ไม่ถือโทษโกรธแช่งซัดฮึดฮัดด่า    \> หัดอภัยเหมือนกีฬาอัชฌาสัย \\
+  ปฏิบัติประพฤติกฎกำหนดใจ       \> พูดจาให้จ๊ะ ๆ จ๋า ๆ น่าฟังเอย ฯ\\
+  \end{tabbing}}
+
+\newcommand{\testenglish}[3]{%
+#1 \fontseries{#2}\fontshape{#3}\selectfont
+\noindent
+A quick brown fox jumps over the lazy dog.}
+
+\newcommand{\testEnglish}[3]{%
+#1 \fontseries{#2}\fontshape{#3}\selectfont
+  \noindent
+  \MakeUppercase{A quick brown fox jumps over the lazy dog.}}
+
+\newcommand{\testligkern}[3]{%
+#1 \fontseries{#2}\fontshape{#3}\selectfont
+\noindent
+
+ที่ ท่า ทิ้ง ท้า กิ๊ง ก๊ง ตี๋ ต๋า บ่น ป่น, บ้น ป้น, บ๊น ป๊น, บ๋น ป๋น บิน ปิน บีน ปีน บิ่น ปิ่น บัน ปั่น บั่น
+ก็ ป็ ปู่ ญ ญุ ญู ญฺ ฐ ฐุ ฐู ฐฺ กุ ฎุ ฎู ฎฺ ฏุ ฏู ฏฺ บำ บ่ำ ปำ ป่ำ -\textyamakkan{}
+\textfongmun{} \textangkhankhu{} \textkhomut{}
+ปะเฺติ็ลฺ โฺญฺ็จฺ ปั็วฮฺ ทฺ็อง เปฺิ็ว มูํย
+แต็่ง เจฺํอ เปรฺิ่ห์ โจ๊่ เปฺี่ย โฺทร ม็่อง เติ็ง อาื ยาึ ปิํปี็ป็่ป๊่ปฺ่
+จือรฺุ การฺู
+- -- --- `` '' \dag{} \ddag{} \S{} \P{} \${} \ae{} \AE{} \oe{} \OE{} \aa{}
+\AA{} \ss{} \copyright{} \textregistered{} \texttrademark{} \textbackslash{}
+\textasciicircum{} \textasciitilde{} \textbar{} \textbraceleft{}
+\textbraceright{} ?` !` ff fi fl ffi ffl tt ti AV\\
+
+}
+
+\newcommand{\testpali}[4]{%
+\ifthenelse{\equal{#2}{ChulabhornLikitText} }%
+    {\renewfontfamily#1{#2}[
+      FontFace = {l}{n}{ Font = *-Light },
+      FontFace = {mb}{n}{ Font = *-Medium},
+      Script=Thai,
+      Language=Pali
+    ]}%
+    {\ifthenelse{\equal{#2}{Anakotmai} }%
+    {\renewfontfamily#1{#2}[
+      FontFace = {l}{n}{ Font = *-Light },
+      FontFace = {mb}{n}{ Font = *-Medium},
+      Script=Thai,
+      Language=Pali
+    ]}}%
+    {\renewfontfamily#1{#2}[Script=Thai,Language=Pali]}%
+#1 \fontseries{#3}\fontshape{#4}\selectfont
+\noindent
+หตฺเถสุ ภิกฺขเว สติ, อาทานนิกฺเขปนํ ปญฺญายติ\\
+เอวเมว โข ภิกฺขเว\\
+จกฺขุสมิํปิ สติ\\
+จกฺขุสมฺผสฺสปจฺจยา อุปฺปชฺชติ อชฺฌตฺตํ สุขทุกฺขํ\\
+ทิฏฺฐา มยา ภิกฺขเว ฉ ผสฺสายตนิกา นาม นิรยา\\}
+
+\begin{document}
+\title{แบบอักษรภาษาไทย}
+\subtitle{OpenType Font \& Fontspec \& \XeLaTeX  \\ Laksaman \& Chulabhorn Likit Text \& Anakotmai}
+\author{}
+\date{\today}
+
+\pagestyle{empty}
+\maketitle
+
+\pagestyle{empty}
+\vfil
+
+
+\begin{figure*}
+  \Large
+  \showthaifont
+\end{figure*}
+\vfil
+\clearpage
+
+\pagestyle{plain}
+
+\section{\fontspec{Laksaman}\fontseries{b}\fontshape{n}\selectfont Laksaman -- ลักษมัณ\protect\footnote{ดัดแปลงจาก TH Sarabun New ของคุณศุภกิจ เฉลิมลาภ}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\laksaman}{m}{n}
+
+\testthaipoem{\laksaman}{b}{n}
+
+\testthaipoem{\laksaman}{m}{it}
+
+\testthaipoem{\laksaman}{b}{it}
+
+\subsection{ตัวอย่างภาษาอังกฤษ}
+
+\testenglish{\laksaman}{m}{n}
+
+\testenglish{\laksaman}{b}{n}
+
+\testenglish{\laksaman}{m}{it}
+
+\testenglish{\laksaman}{b}{it}
+
+\testEnglish{\laksaman}{m}{n}
+
+\testEnglish{\laksaman}{b}{n}
+
+\testEnglish{\laksaman}{m}{it}
+
+\testEnglish{\laksaman}{b}{it}
+
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\laksaman}{m}{n}
+
+\testligkern{\laksaman}{b}{n}
+
+\testligkern{\laksaman}{m}{it}
+
+\testligkern{\laksaman}{b}{it}
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\laksaman}{Laksaman}{m}{n}
+
+\testpali{\laksaman}{Laksaman}{b}{n}
+
+\testpali{\laksaman}{Laksaman}{m}{it}
+
+\testpali{\laksaman}{Laksaman}{b}{it}
+
+\vfil\pagebreak
+
+\section{\ChulabhornLikitText\fontseries{b}\fontshape{n}\selectfont ChulabhornLikitText -- จุฬาภรณ์ลิขิต\protect\footnote{โดย Promphan Suksumek | Cadson Demak Team.}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\ChulabhornLikitText}{l}{n}
+
+\testthaipoem{\ChulabhornLikitText}{m}{n}
+
+\testthaipoem{\ChulabhornLikitText}{mb}{n}
+
+\testthaipoem{\ChulabhornLikitText}{b}{n}
+
+
+\subsection{ตัวอย่างภาษาอังกฤษ}
+
+\testenglish{\ChulabhornLikitText}{l}{n}
+
+\testenglish{\ChulabhornLikitText}{m}{n}
+
+\testenglish{\ChulabhornLikitText}{mb}{n}
+
+\testenglish{\ChulabhornLikitText}{b}{n}
+
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\ChulabhornLikitText}{l}{n}
+
+\testligkern{\ChulabhornLikitText}{m}{n}
+
+\testligkern{\ChulabhornLikitText}{mb}{n}
+
+\testligkern{\ChulabhornLikitText}{b}{n}
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\ChulabhornLikitText}{ChulabhornLikitText}{l}{n}
+
+\testpali{\ChulabhornLikitText}{ChulabhornLikitText}{m}{n}
+
+\testpali{\ChulabhornLikitText}{ChulabhornLikitText}{mb}{n}
+
+\testpali{\ChulabhornLikitText}{ChulabhornLikitText}{b}{n}
+
+
+\vfil\pagebreak
+
+\section{\Anakotmai\fontseries{b}\fontshape{n}\selectfont Anakotmai -- อนาคตใหม่\protect\footnote{โดย Smich Smanloh | Cadson Demak Co.,Ltd.}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\Anakotmai}{l}{n}
+
+\testthaipoem{\Anakotmai}{mb}{n}
+
+\testthaipoem{\Anakotmai}{b}{n}
+
+
+\subsection{ตัวอย่างภาษาอังกฤษ}
+
+\testenglish{\Anakotmai}{l}{n}
+
+\testenglish{\Anakotmai}{mb}{n}
+
+\testenglish{\Anakotmai}{b}{n}
+
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\Anakotmai}{l}{n}
+
+\testligkern{\Anakotmai}{mb}{n}
+
+\testligkern{\Anakotmai}{b}{n}
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\Anakotmai}{Anakotmai}{l}{n}
+
+\testpali{\Anakotmai}{Anakotmai}{mb}{n}
+
+\testpali{\Anakotmai}{Anakotmai}{b}{n}
+
+
+\vfil\pagebreak
+
+\end{document}
