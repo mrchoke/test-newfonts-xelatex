@@ -1,19 +1,16 @@
 \documentclass[titlepage,a4paper,10pt]{scrartcl}
-\usepackage{fontspec}
+\usepackage{fontspec}[no-math] 
 \usepackage{xltxtra}
 \usepackage{polyglossia}
 \usepackage{ifthen}
-
-\defaultfontfeatures{
-  Extension       = .otf ,
-  Mapping       = tex-text,
-  Script          = Thai
-  }
 
 \defaultfontfeatures[Garuda,TlwgTypist]{
 ItalicFont      = *-Oblique ,
 BoldFont        = *-Bold ,
 BoldItalicFont  = *-BoldOblique ,
+Extension       = .otf ,
+Mapping       = tex-text,
+Script          = Thai
 }
 
 \defaultfontfeatures[Norasi]{
@@ -22,6 +19,9 @@ SlantedFont     = *-Oblique ,
 BoldFont        = *-Bold ,
 BoldItalicFont  = *-BoldItalic ,
 BoldSlantedFont = *-BoldOblique ,
+Extension       = .otf ,
+Mapping       = tex-text,
+Script          = Thai
 }
 
 % Laksaman or Saraban
@@ -29,6 +29,9 @@ BoldSlantedFont = *-BoldOblique ,
 ItalicFont      = *-Italic ,
 BoldFont        = *-Bold ,
 BoldItalicFont  = *-BoldItalic ,
+Extension       = .otf ,
+Mapping       = tex-text,
+Script          = Thai
 }
 
 % Chulabhorn Likit Text
@@ -36,13 +39,38 @@ BoldItalicFont  = *-BoldItalic ,
 Path                = ./,
 UprightFont   = *-Regular,
 BoldFont        = *-Bold ,
+Extension       = .otf ,
+Mapping       = tex-text,
+Script          = Thai
 }
 
 % Anakotmai
 \defaultfontfeatures[Anakotmai]{
 Path                = ./,
-UprightFont   = *-Medium,
+UprightFont   = *-Light,
 BoldFont             = *-Bold ,
+Extension       = .otf ,
+Mapping       = tex-text,
+Script          = Thai
+}
+
+% Thummasat
+\defaultfontfeatures[TUFont]{
+Path                = ./,
+BoldFont             = *-Bold ,
+Extension       = .ttf,
+Mapping       = tex-text,
+Script          = Thai
+}
+
+% Pridi
+\defaultfontfeatures[Pridi]{
+Path                = ./,
+UprightFont   = *-Regular,
+BoldFont             = *-Bold ,
+Extension       = .ttf,
+Mapping       = tex-text,
+Script          = Thai
 }
 
 \newfontfamily\laksaman{Laksaman}
@@ -54,6 +82,14 @@ BoldFont             = *-Bold ,
 \newfontfamily\Anakotmai{Anakotmai}[
   FontFace = {mb}{n}{ Font = *-Medium },
   FontFace = {l}{n}{ Font = *-Light },
+]
+
+\newfontfamily\TUFont{TUFont}
+\newfontfamily\Pridi{Pridi}[
+  FontFace = {el}{n}{ Font = *-ExtraLight },
+  FontFace = {l}{n}{ Font = *-Light },
+  FontFace = {mb}{n}{ Font = *-Medium },
+  FontFace = {sb}{n}{ Font = *-Semibold },
 ]
 
 
@@ -74,7 +110,7 @@ BoldFont             = *-Bold ,
 \def\textkhomut{\symbol{"0E5B}}
 
 \makeatletter
-\def\flist{Laksaman,ChulabhornLikitText,Anakotmai}
+\def\flist{Laksaman,ChulabhornLikitText,Anakotmai,TUFont,Pridi}
 
 \newcommand\showthaifont{
   \begin{itemize}
@@ -128,21 +164,42 @@ A quick brown fox jumps over the lazy dog.}
 }
 
 \newcommand{\testpali}[4]{%
-\ifthenelse{\equal{#2}{ChulabhornLikitText} }%
-    {\renewfontfamily#1{#2}[
+
+\def\args{#2}
+\def\pridiTxt{Pridi}
+\def\chulabhornTxt{ChulabhornLikitText}
+\def\anakotmaiTxt{Anakotmai}
+
+
+\ifthenelse{\equal{#2}{Pridi}}%
+      {\renewfontfamily#1{#2}[%
+      FontFace = {el}{n}{ Font = *-ExtraLight },
       FontFace = {l}{n}{ Font = *-Light },
-      FontFace = {mb}{n}{ Font = *-Medium},
+      FontFace = {mb}{n}{ Font = *-Medium },
+      FontFace = {sb}{n}{ Font = *-Semibold },
       Script=Thai,
       Language=Pali
-    ]}%
-    {\ifthenelse{\equal{#2}{Anakotmai} }%
-    {\renewfontfamily#1{#2}[
-      FontFace = {l}{n}{ Font = *-Light },
-      FontFace = {mb}{n}{ Font = *-Medium},
-      Script=Thai,
-      Language=Pali
-    ]}}%
-    {\renewfontfamily#1{#2}[Script=Thai,Language=Pali]}%
+    ]}{
+ \ifthenelse{\equal{#2}{Anakotmai}}%
+   { \renewfontfamily#1{#2}[%
+    FontFace = {l}{n}{ Font = *-Light },
+    FontFace = {mb}{n}{ Font = *-Medium},
+    Script=Thai,
+    Language=Pali
+  ]}{
+    \ifthenelse{\equal{#2}{ChulabhornLikitText}}%
+    {\renewfontfamily#1{#2}[%
+    FontFace = {l}{n}{ Font = *-Light },
+    FontFace = {mb}{n}{ Font = *-Medium},
+    Script=Thai,
+    Language=Pali
+  ]}{
+   \renewfontfamily#1{#2}[Script=Thai,Language=Pali]%
+}
+  }
+    }
+
+ 
 #1 \fontseries{#3}\fontshape{#4}\selectfont
 \noindent
 หตฺเถสุ ภิกฺขเว สติ, อาทานนิกฺเขปนํ ปญฺญายติ\\
@@ -153,7 +210,7 @@ A quick brown fox jumps over the lazy dog.}
 
 \begin{document}
 \title{แบบอักษรภาษาไทย}
-\subtitle{OpenType Font \& Fontspec \& \XeLaTeX  \\ Laksaman \& Chulabhorn Likit Text \& Anakotmai}
+\subtitle{TrueType \& OpenType Font \& Fontspec \& \XeLaTeX }
 \author{}
 \date{\today}
 
@@ -315,4 +372,101 @@ A quick brown fox jumps over the lazy dog.}
 
 \vfil\pagebreak
 
+\section{\TUFont\fontseries{b}\fontshape{n}\selectfont TUFont -- ธรรมศาสตร์\protect\footnote{โดย Umaporn Matturos}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\TUFont}{m}{n}
+
+\testthaipoem{\TUFont}{b}{n}
+
+
+\subsection{ตัวอย่างภาษาอังกฤษ}
+
+\testenglish{\TUFont}{m}{n}
+
+\testenglish{\TUFont}{b}{n}
+
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\TUFont}{m}{n}
+
+\testligkern{\TUFont}{b}{n}
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\TUFont}{TUFont}{m}{n}
+
+\testpali{\TUFont}{TUFont}{b}{n}
+
+
+\vfil\pagebreak
+
+\section{\Pridi\fontseries{b}\fontshape{n}\selectfont Pridi -- ปรีดี\protect\footnote{โดย Katatrad Team | Cadson Demak}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\Pridi}{el}{n}
+
+\testthaipoem{\Pridi}{l}{n}
+
+\testthaipoem{\Pridi}{m}{n}
+
+\testthaipoem{\Pridi}{mb}{n}
+
+\testthaipoem{\Pridi}{sb}{n}
+
+\testthaipoem{\Pridi}{b}{n}
+
+
+\subsection{ตัวอย่างภาษาอังกฤษ}
+
+\testenglish{\Pridi}{el}{n}
+
+\testenglish{\Pridi}{l}{n}
+
+\testenglish{\Pridi}{m}{n}
+
+\testenglish{\Pridi}{mb}{n}
+
+\testenglish{\Pridi}{sb}{n}
+
+\testenglish{\Pridi}{b}{n}
+
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\Pridi}{el}{n}
+
+\testligkern{\Pridi}{l}{n}
+
+\testligkern{\Pridi}{m}{n}
+
+\testligkern{\Pridi}{mb}{n}
+
+\testligkern{\Pridi}{sb}{n}
+
+\testligkern{\Pridi}{b}{n}
+
+
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\Pridi}{Pridi}{el}{n}
+
+\testpali{\Pridi}{Pridi}{l}{n}
+
+\testpali{\Pridi}{Pridi}{m}{n}
+
+\testpali{\Pridi}{Pridi}{mb}{n}
+
+\testpali{\Pridi}{Pridi}{sb}{n}
+
+\testpali{\Pridi}{Pridi}{b}{n}
+
+
+\vfil\pagebreak
 \end{document}
