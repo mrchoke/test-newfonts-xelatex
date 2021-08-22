@@ -73,6 +73,16 @@ Mapping       = tex-text,
 Script          = Thai
 }
 
+% iannnnn-DOG
+\defaultfontfeatures[iannnnnDOG]{
+Path                = ./,
+UprightFont   = *-Regular,
+BoldFont             = *-Bold ,
+Extension       = .ttf ,
+Mapping       = tex-text,
+Script          = Thai
+}
+
 \newfontfamily\laksaman{Laksaman}
 \newfontfamily\ChulabhornLikitText{ChulabhornLikitText}[
   FontFace = {mb}{n}{ Font = *-Medium },
@@ -92,6 +102,9 @@ Script          = Thai
   FontFace = {sb}{n}{ Font = *-Semibold },
 ]
 
+\newfontfamily\iannnnnDOG{iannnnnDOG}[
+  FontFace = {l}{n}{ Font = *-Light },
+]
 
 \newfontfamily\thaifont{Norasi}
 \newfontfamily\thaifontsf{Garuda}
@@ -110,7 +123,7 @@ Script          = Thai
 \def\textkhomut{\symbol{"0E5B}}
 
 \makeatletter
-\def\flist{Laksaman,ChulabhornLikitText,Anakotmai,TUFont,Pridi}
+\def\flist{Laksaman,ChulabhornLikitText,Anakotmai,TUFont,Pridi,iannnnnDOG}
 
 \newcommand\showthaifont{
   \begin{itemize}
@@ -165,12 +178,6 @@ A quick brown fox jumps over the lazy dog.}
 
 \newcommand{\testpali}[4]{%
 
-\def\args{#2}
-\def\pridiTxt{Pridi}
-\def\chulabhornTxt{ChulabhornLikitText}
-\def\anakotmaiTxt{Anakotmai}
-
-
 \ifthenelse{\equal{#2}{Pridi}}%
       {\renewfontfamily#1{#2}[%
       FontFace = {el}{n}{ Font = *-ExtraLight },
@@ -187,6 +194,7 @@ A quick brown fox jumps over the lazy dog.}
     Script=Thai,
     Language=Pali
   ]}{
+    
     \ifthenelse{\equal{#2}{ChulabhornLikitText}}%
     {\renewfontfamily#1{#2}[%
     FontFace = {l}{n}{ Font = *-Light },
@@ -194,7 +202,14 @@ A quick brown fox jumps over the lazy dog.}
     Script=Thai,
     Language=Pali
   ]}{
+    \ifthenelse{\equal{#2}{iannnnnDOG}}%
+    { \renewfontfamily#1{#2}[%
+     FontFace = {l}{n}{ Font = *-Light },
+     Script=Thai,
+     Language=Pali
+   ]}{
    \renewfontfamily#1{#2}[Script=Thai,Language=Pali]%
+   }
 }
   }
     }
@@ -495,5 +510,48 @@ A quick brown fox jumps over the lazy dog.}
 \testpali{\Pridi}{Pridi}{b}{n}
 
 
+\vfil\pagebreak
+
+\section{\iannnnnDOG\fontseries{b}\fontshape{n}\selectfont iannnnn-DOG -- หมา\protect\footnote{โดย Prachya Singhto}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\iannnnnDOG}{l}{n}
+
+\testthaipoem{\iannnnnDOG}{m}{n}
+
+\testthaipoem{\iannnnnDOG}{b}{n}
+
+
+\subsection{ตัวอย่างภาษาอังกฤษ}
+
+\testenglish{\iannnnnDOG}{l}{n}
+
+\testenglish{\iannnnnDOG}{m}{n}
+
+\testenglish{\iannnnnDOG}{b}{n}
+
+\testEnglish{\iannnnnDOG}{l}{n}
+
+\testEnglish{\iannnnnDOG}{m}{n}
+
+\testEnglish{\iannnnnDOG}{b}{n}
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\iannnnnDOG}{l}{n}
+
+\testligkern{\iannnnnDOG}{m}{n}
+
+\testligkern{\iannnnnDOG}{b}{n}
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\iannnnnDOG}{iannnnnDOG}{l}{n}
+
+\testpali{\iannnnnDOG}{iannnnnDOG}{m}{n}
+
+\testpali{\iannnnnDOG}{iannnnnDOG}{b}{n}
 \vfil\pagebreak
 \end{document}
