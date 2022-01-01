@@ -1,1 +1,1 @@
-# ทดสอบ OTF Fonts บน XeLaTex
+# ทดสอบ OTF & TTF Fonts บน XeLaTex
