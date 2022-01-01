@@ -83,6 +83,14 @@ Mapping       = tex-text,
 Script          = Thai
 }
 
+% ChitPhumisak
+\defaultfontfeatures[ChitPhumisak]{
+Path                = ./,
+Extension       = .ttf,
+Mapping       = tex-text,
+Script          = Thai
+}
+
 \newfontfamily\laksaman{Laksaman}
 \newfontfamily\ChulabhornLikitText{ChulabhornLikitText}[
   FontFace = {mb}{n}{ Font = *-Medium },
@@ -95,6 +103,8 @@ Script          = Thai
 ]
 
 \newfontfamily\TUFont{TUFont}
+\newfontfamily\ChitPhumisak{ChitPhumisak}
+
 \newfontfamily\Pridi{Pridi}[
   FontFace = {el}{n}{ Font = *-ExtraLight },
   FontFace = {l}{n}{ Font = *-Light },
@@ -123,7 +133,7 @@ Script          = Thai
 \def\textkhomut{\symbol{"0E5B}}
 
 \makeatletter
-\def\flist{Laksaman,ChulabhornLikitText,Anakotmai,TUFont,Pridi,iannnnnDOG}
+\def\flist{Laksaman,ChulabhornLikitText,Anakotmai,TUFont,Pridi,iannnnnDOG,ChitPhumisak}
 
 \newcommand\showthaifont{
   \begin{itemize}
@@ -553,5 +563,28 @@ A quick brown fox jumps over the lazy dog.}
 \testpali{\iannnnnDOG}{iannnnnDOG}{m}{n}
 
 \testpali{\iannnnnDOG}{iannnnnDOG}{b}{n}
+
+\vfil\pagebreak
+
+\section{\ChitPhumisak\fontseries{b}\fontshape{n}\selectfont  จิตร ภูมิศักดิ์ -- {\LARGE A} \protect\footnote{โดย PrachathipaType}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\ChitPhumisak}{m}{n}
+
+
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\ChitPhumisak}{m}{n}
+
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\TUFont}{ChitPhumisak}{m}{n}
+
+
+
 \vfil\pagebreak
 \end{document}
