@@ -1,0 +1,216 @@
+{
+  "image": "mrchoke/texlive:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "James-Yu.latex-workshop"
+      ],
+      "settings": {
+        "python.pythonPath": ".env/bin/python",
+        "remote.localPortHost": "allInterfaces",
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSaveMode": "file",
+        "files.associations": {
+          "*.cls": "latex",
+          "*.py": "python"
+        },
+        "latex-workshop.view.pdf.viewer": "tab",
+        "latex-workshop.latex.watch.files.ignore": [
+          "**/*.bbx",
+          "**/*.bbl",
+          "**/*.cbx",
+          "**/*.cfg",
+          "**/*.clo",
+          "**/*.cnf",
+          "**/*.def",
+          "**/*.dfu",
+          "**/*.enc",
+          "**/*.fd",
+          "**/*.fmt",
+          "**/*.lbx",
+          "**/*.map",
+          "**/*.mkii",
+          "**/*.pfb",
+          "**/*.tfm",
+          "**/*.vf",
+          "**/*.code.tex",
+          "**/*.sty",
+          "**/texmf-{dist,var}/**",
+          "/usr/local/texlive/**",
+          "/dev/null",
+          "knitr.sty",
+          "minted-.sty"
+        ],
+        "latex-workshop.latex.search.rootFiles.include": [
+          "**/*.tex",
+          "**/*.rnw",
+          "**/*.Rnw",
+          "**/*.cls"
+        ],
+        "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
+        "latex-workshop.latex.tools": [
+          {
+            "name": "xelatexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-halt-on-error",
+              "-xelatex",
+              "-outdir=%OUTDIR%",
+              "-shell-escape",
+              "%DOC%"
+            ],
+            "env": {}
+          },
+          {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-halt-on-error",
+              "-pdf",
+              "-outdir=%OUTDIR%",
+              "-shell-escape",
+              "%DOC%"
+            ]
+          },
+          {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-halt-on-error",
+              "-lualatex",
+              "-outdir=%OUTDIR%",
+              "-shell-escape",
+              "%DOC%"
+            ],
+            "env": {}
+          },
+          {
+            "name": "latexmk_rconly",
+            "command": "latexmk",
+            "args": [
+              "%DOC%"
+            ],
+            "env": {}
+          },
+          {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "-file-line-error",
+              "-halt-on-error",
+              "-shell-escape",
+              "%DOC%"
+            ],
+            "env": {}
+          },
+          {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+              "%DOCFILE%"
+            ],
+            "env": {}
+          },
+          {
+            "name": "rnw2tex",
+            "command": "Rscript",
+            "args": [
+              "-e",
+              "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+            ],
+            "env": {}
+          },
+          {
+            "name": "jnw2tex",
+            "command": "julia",
+            "args": [
+              "-e",
+              "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+            ],
+            "env": {}
+          },
+          {
+            "name": "jnw2texmintex",
+            "command": "julia",
+            "args": [
+              "-e",
+              "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+            ],
+            "env": {}
+          }
+        ],
+        "[latex]": {
+          "editor.defaultFormatter": "James-Yu.latex-workshop"
+        },
+        "latex-workshop.latex.recipes": [
+          {
+            "name": "latexmk (xelatex)",
+            "tools": [
+              "xelatexmk"
+            ]
+          },
+          {
+            "name": "latexmk 🔃",
+            "tools": [
+              "latexmk"
+            ]
+          },
+          {
+            "name": "latexmk (latexmkrc)",
+            "tools": [
+              "latexmk_rconly"
+            ]
+          },
+          {
+            "name": "latexmk (lualatex)",
+            "tools": [
+              "lualatexmk"
+            ]
+          },
+          {
+            "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+            "tools": [
+              "pdflatex",
+              "bibtex",
+              "pdflatex",
+              "pdflatex"
+            ]
+          },
+          {
+            "name": "Compile Rnw files",
+            "tools": [
+              "rnw2tex",
+              "latexmk"
+            ]
+          },
+          {
+            "name": "Compile Jnw files",
+            "tools": [
+              "jnw2tex",
+              "latexmk"
+            ]
+          },
+          {
+            "name": "tectonic",
+            "tools": [
+              "tectonic"
+            ]
+          }
+        ],
+        "latex-workshop.latex.recipe.default": "lastUsed"
+      }
+    }
+  }
+}
