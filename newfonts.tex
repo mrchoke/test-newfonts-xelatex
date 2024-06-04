@@ -9,7 +9,7 @@ ItalicFont      = *-Oblique ,
 BoldFont        = *-Bold ,
 BoldItalicFont  = *-BoldOblique ,
 Extension       = .otf ,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
@@ -20,7 +20,7 @@ BoldFont        = *-Bold ,
 BoldItalicFont  = *-BoldItalic ,
 BoldSlantedFont = *-BoldOblique ,
 Extension       = .otf ,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
@@ -30,64 +30,74 @@ ItalicFont      = *-Italic ,
 BoldFont        = *-Bold ,
 BoldItalicFont  = *-BoldItalic ,
 Extension       = .otf ,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
 % Chulabhorn Likit Text
 \defaultfontfeatures[ChulabhornLikitText]{
-Path                = ./,
-UprightFont   = *-Regular,
+Path            = ./,
+UprightFont     = *-Regular,
 BoldFont        = *-Bold ,
 Extension       = .otf ,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
 % Anakotmai
 \defaultfontfeatures[Anakotmai]{
-Path                = ./,
-UprightFont   = *-Light,
-BoldFont             = *-Bold ,
+Path            = ./,
+UprightFont     = *-Light,
+BoldFont        = *-Bold ,
 Extension       = .otf ,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
 % Thummasat
 \defaultfontfeatures[TUFont]{
-Path                = ./,
-BoldFont             = *-Bold ,
+Path            = ./,
+BoldFont        = *-Bold ,
 Extension       = .ttf,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
 % Pridi
 \defaultfontfeatures[Pridi]{
-Path                = ./,
-UprightFont   = *-Regular,
-BoldFont             = *-Bold ,
+Path            = ./,
+UprightFont     = *-Regular,
+BoldFont        = *-Bold ,
 Extension       = .ttf,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
 % iannnnn-DOG
 \defaultfontfeatures[iannnnnDOG]{
-Path                = ./,
-UprightFont   = *-Regular,
-BoldFont             = *-Bold ,
+Path            = ./,
+UprightFont     = *-Regular,
+BoldFont        = *-Bold ,
 Extension       = .ttf ,
-Mapping       = tex-text,
+Mapping         = tex-text,
 Script          = Thai
 }
 
 % ChitPhumisak
 \defaultfontfeatures[ChitPhumisak]{
-Path                = ./,
+Path            = ./,
 Extension       = .ttf,
-Mapping       = tex-text,
+Mapping         = tex-text,
+Script          = Thai
+}
+
+% SaoChingcha
+\defaultfontfeatures[SaoChingcha]{
+Path            = ./,
+UprightFont     = *-Regular,
+BoldFont        = *-Bold ,
+Extension       = .otf ,
+Mapping         = tex-text,
 Script          = Thai
 }
 
@@ -116,6 +126,10 @@ Script          = Thai
   FontFace = {l}{n}{ Font = *-Light },
 ]
 
+\newfontfamily\SaoChingcha{SaoChingcha}[
+  FontFace = {l}{n}{ Font = *-Light },
+]
+
 \newfontfamily\thaifont{Norasi}
 \newfontfamily\thaifontsf{Garuda}
 \newfontfamily\thaifonttt{TlwgTypist}
@@ -133,7 +147,7 @@ Script          = Thai
 \def\textkhomut{\symbol{"0E5B}}
 
 \makeatletter
-\def\flist{Laksaman,ChulabhornLikitText,Anakotmai,TUFont,Pridi,iannnnnDOG,ChitPhumisak}
+\def\flist{Laksaman,ChulabhornLikitText,Anakotmai,TUFont,Pridi,iannnnnDOG,ChitPhumisak,SaoChingcha}
 
 \newcommand\showthaifont{
   \begin{itemize}
@@ -218,8 +232,15 @@ A quick brown fox jumps over the lazy dog.}
      Script=Thai,
      Language=Pali
    ]}{
+    \ifthenelse{\equal{#2}{SaoChingcha}}%
+    { \renewfontfamily#1{#2}[%
+     FontFace = {l}{n}{ Font = *-Light },
+     Script=Thai,
+     Language=Pali
+   ]}
+    {
    \renewfontfamily#1{#2}[Script=Thai,Language=Pali]%
-   }
+   }}
 }
   }
     }
@@ -585,6 +606,49 @@ A quick brown fox jumps over the lazy dog.}
 \testpali{\TUFont}{ChitPhumisak}{m}{n}
 
 
+\vfil\pagebreak
+
+\section{\SaoChingcha\fontseries{b}\fontshape{n}\selectfont SaoChingcha - เสาชิงช้า \protect\footnote{โดย JD, Suppakit Chalermlarp}}
+
+\subsection{ตัวอย่างประโยคภาษาไทย}
+
+\testthaipoem{\SaoChingcha}{l}{n}
+
+\testthaipoem{\SaoChingcha}{m}{n}
+
+\testthaipoem{\SaoChingcha}{b}{n}
+
+
+\subsection{ตัวอย่างภาษาอังกฤษ}
+
+\testenglish{\SaoChingcha}{l}{n}
+
+\testenglish{\SaoChingcha}{m}{n}
+
+\testenglish{\SaoChingcha}{b}{n}
+
+\testEnglish{\SaoChingcha}{l}{n}
+
+\testEnglish{\SaoChingcha}{m}{n}
+
+\testEnglish{\SaoChingcha}{b}{n}
+
+\subsection{การจัดระดับตัวอักษรและตัวอักษรพิเศษ}
+
+\testligkern{\SaoChingcha}{l}{n}
+
+\testligkern{\SaoChingcha}{m}{n}
+
+\testligkern{\SaoChingcha}{b}{n}
+
+
+\subsection{ภาษาบาลี-สันสกฤต}
+
+\testpali{\SaoChingcha}{SaoChingcha}{l}{n}
+
+\testpali{\SaoChingcha}{SaoChingcha}{m}{n}
+
+\testpali{\SaoChingcha}{SaoChingcha}{b}{n}
 
 \vfil\pagebreak
 \end{document}
